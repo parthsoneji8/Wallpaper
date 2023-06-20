@@ -55,7 +55,7 @@ class _Full_WallpaperState extends State<Full_Wallpaper> {
 
   void _showMenuDialogWithTimer() {
     menudialog();
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.pop(context);
     });
   }
@@ -131,7 +131,6 @@ class _Full_WallpaperState extends State<Full_Wallpaper> {
                     setState(() {
                       _isImageDownloaded = true;
                     });
-
                     widget.image.startsWith('http')
                         ? saveImage.saveImage(widget.image, _isImageDownloaded,
                             _selectedWallpaperType)

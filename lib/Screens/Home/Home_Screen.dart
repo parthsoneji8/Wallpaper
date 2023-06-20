@@ -15,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 // ignore: duplicate_ignore
 class _HomeScreenState extends State<HomeScreen> {
+
   List<String> images = [
     "images/Home/1.png",
     "images/Home/2.png",
@@ -99,20 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 enlargeCenterPage: true,
                 height: 150,
                 reverse: false,
-                aspectRatio: 5.0,
-              ),
-              itemBuilder: (context, i, id) {
-                if (imageList[i] == null || imageList[i].isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
+                aspectRatio: 5.0),
+                itemBuilder: (context, i, id) {
                   return GestureDetector(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: Colors.white),
                       ),
-                      // ClipRRect for image border radius
-                      child: ClipRRect(
+                      child: imageList[i] == null || imageList[i].isEmpty ? Center(child: CircularProgressIndicator()) : ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.network(
                           imageList[i],
@@ -131,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   );
                 }
-              },
             ),
           ),
           const Padding(
@@ -192,12 +187,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 } else if (index == 3) {
-                  // Show the "See More" container
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        // Navigate to the new page when "See More" is clicked
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -209,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors
-                              .grey, // Customize the background color of the "See More" container
+                              .grey,
                         ),
                         child: Center(
                           child: Column(
@@ -231,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 } else {
-                  // Hide the remaining containers beyond index 3
+
                   return Container();
                 }
               },

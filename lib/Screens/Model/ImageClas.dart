@@ -12,21 +12,27 @@ class ImageSaver {
   int assetvalue;
 
   Future<void> saveImage(String imageUrl, bool downlaod, int valueSet) async {
+
     abstract = downlaod;
     assetvalue = valueSet;
+
     final response = await Dio().get(
       imageUrl,
       options: Options(responseType: ResponseType.bytes),
     );
+
     final bytes = Uint8List.fromList(response.data);
 
     final directory = await DownloadsPathProvider.downloadsDirectory;
+
     final wallpaperFolder = Directory('${directory.path}/Wallpaper');
+
     if (!(await wallpaperFolder.exists())) {
       await wallpaperFolder.create(recursive: true);
     }
 
     final fileName = 'image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+
     File filePath = File('${wallpaperFolder.path}/$fileName');
 
     await filePath.writeAsBytes(bytes);
@@ -39,7 +45,9 @@ class ImageSaver {
   }
 
   void createWallpaperFolder(String image, bool downlaod, valueSet) async {
+
     Directory downloadDir = await DownloadsPathProvider.downloadsDirectory;
+
     abstract = downlaod;
     assetvalue = valueSet;
 
@@ -47,15 +55,17 @@ class ImageSaver {
       String downloadPath = downloadDir.path;
 
       Directory wallpaper = Directory('$downloadPath/Wallpaper');
+
       if (!(await wallpaper.exists())) {
         wallpaper.create(recursive: true);
       }
       await downloadAndSaveImage(wallpaper, image);
-    } else {}
+    }
+    else {}
   }
 
-  Future<void> downloadAndSaveImage(
-      final Directory wallpaper, String image) async {
+  Future<void> downloadAndSaveImage(final Directory wallpaper, String image) async {
+
     String assetImagePath = image;
 
     List<String> assetImagePathParts = assetImagePath.split('/');
